@@ -49,7 +49,7 @@ public class parallel_einzigartige_Werte {
             // Ermittlung der Zeit in Nanosekunden vor der Ausführung des Codes
 
             FileInputStream fis = new FileInputStream(Excel_Pfad);
-            // Öffneung der Excel-Datei mit einem FileInputStream, um auf die Daten zuzugreifen
+            // Öffnung der Excel-Datei mit einem FileInputStream, um auf die Daten zuzugreifen
             Workbook wb = new XSSFWorkbook(fis);
             // Erstellung eines Workbook-Objekts, das die Excel-Datei repräsentiert
             Sheet Arbeitsblatt = wb.getSheetAt(0);
@@ -61,7 +61,7 @@ public class parallel_einzigartige_Werte {
             // Erstellung einer Liste von Listen, um die Daten jeder Spalte zu speichern
 
             for (int i = 0; i < Spalte; i++) Daten.add(new ArrayList<>());
-            // Initialiisierung einer eigenen Liste für jede Spalte, um die Werte zu speichern
+            // Initialisierung einer eigenen Liste für jede Spalte, um die Werte zu speichern
 
             for (Row Zeile : Arbeitsblatt) {
                 // Iterieren über jede Zeile im Arbeitsblatt
@@ -75,7 +75,7 @@ public class parallel_einzigartige_Werte {
             }
 
             ExecutorService Pool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
-            // Erstellung eines Thread Pools mit der Anzahl von verfügbaren Kernen des Systems, um parallele Aufgaben auszuführen
+            // Erstellung eines Thread-Pools mit der Anzahl von verfügbaren Kernen des Systems, um parallele Aufgaben auszuführen
             List<Future<String>> Ergebnisse = new ArrayList<>();
             // Erstellung einer ArrayList um die Ergebnisse der parallelen Ausführung zu speichern
 
@@ -93,11 +93,11 @@ public class parallel_einzigartige_Werte {
                     for (int i = 0; i < Spaltenwerte.size(); i++) {
                         //Iterierung über alle Werte in der aktuellen Spalte
                         String Wert = Spaltenwerte.get(i);
-                        // Aberufen des aktuellen Wertes in der Spalte
+                        // Abrufen des aktuellen Wertes in der Spalte
                         int Zähler = 0;
                         // Erstellung eines Zählers für die Häufigkeit des aktuellen Wertes
                         for (String s : Spaltenwerte) {
-                            // Itterierung über alle Werte in der Spalte
+                            // Iterierung über alle Werte in der Spalte
                             if (s.equals(Wert)) Zähler++;
                             // Prüfung, ob der aktuelle Wert gleich dem zu zählenden Wert ist, und Erhöhung des Zählers
                         }
@@ -128,7 +128,7 @@ public class parallel_einzigartige_Werte {
             long Endzeit = System.nanoTime();
             // Erfassung der Endzeit in Nanosekunden nach der Ausführung des Codes
             long Laufzeit = (Endzeit - startzeit) / 1_000_000;
-            // Berechnung der Laufzeit im Millisekunden, indem die Differenz zwischen Endzeit und Startzeit genommen und durch 1.000.000 geteilt wird
+            // Berechnung der Laufzeit in Millisekunden, indem die Differenz zwischen Endzeit und Startzeit genommen und durch 1.000.000 geteilt wird
             long Speicher_nachher = getUsedMemory();
             // Ermittlung des aktuellen Speicherverbrauchs nach der Ausführung des Codes
             long Speicher_Delta = (Speicher_nachher - Speicher_vorher) / 1024;
@@ -144,12 +144,12 @@ public class parallel_einzigartige_Werte {
             System.out.println(" Speicherverbrauch Durchlauf " + d + ": " + Speicher_Delta + " KB");
             // Ausgabe des gemessenen Speicherverbrauchs des aktuellen Durchlaufs in Kilobyte
             System.out.println("------------------------------------");
-            // Einfügung einer Trennlinie zur besseren Lesbarkeit der Ausgabe
+            // Einfügen einer Trennlinie zur besseren Lesbarkeit der Ausgabe
         }
 
         System.out.println(" Durchschnittliche Laufzeit: " + (Gesamtzeit / Durchlaeufe) + " ms");
         // Errechnung und Ausgabe der durchschnittlichen Laufzeit über alle Durchläufe in Millisekunden
-        System.out.println(" Durchschnittlicher Speicherverbrauch: " + (Gesammtspeicher / Durchlaeufe) + " KB");
+        System.out.println(" Durchschnittlicher Speicherverbrauch: " + (Gesamtspeicher / Durchlaeufe) + " KB");
         // Errechnung und Ausgabe des durchschnittlichen Speicherverbrauchs über alle Durchläufe in Kilobyte
     }
 
